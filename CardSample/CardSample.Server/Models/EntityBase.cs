@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CardSample.Server.Models
 {
-    public class EntityBase
+    public abstract class EntityBase
     {
         [Key]
         [Index("IX_Id", 1, IsUnique = true)]
