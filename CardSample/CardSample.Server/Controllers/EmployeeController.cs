@@ -47,7 +47,7 @@ namespace CardSample.Server.Controllers
             model.Id = Guid.NewGuid().ToString();
             model.CreationTime = DateTime.Now;
 
-            var isExist = DbContext.Employees.AsNoTracking().Any(x => x.Name.ToLower() == model.Name.ToLower());
+            var isExist = DbContext.Employees.AsNoTracking().Any(x => x.IsDeleted == false && x.Name.ToLower() == model.Name.ToLower() && x.Id != model.Id);
             if (isExist) return BadRequest($"{model.Name} already exist. Please try with diffrent one");
 
             var employee = DbContext.Employees.Add(model);
@@ -61,7 +61,7 @@ namespace CardSample.Server.Controllers
         {
             model.ModificationTime = DateTime.Now;
 
-            var isExist = DbContext.Employees.AsNoTracking().Any(x => x.Name.ToLower() == model.Name.ToLower());
+            var isExist = DbContext.Employees.AsNoTracking().Any(x => x.IsDeleted == false && x.Name.ToLower() == model.Name.ToLower() && x.Id != model.Id);
             if (isExist) return BadRequest($"{model.Name} already exist. Please try with diffrent one");
 
 

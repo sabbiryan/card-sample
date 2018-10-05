@@ -47,7 +47,7 @@ namespace CardSample.Server.Controllers
             model.Id = Guid.NewGuid().ToString();
             model.CreationTime = DateTime.Now;
 
-            var isExist = DbContext.Departments.AsNoTracking().Any(x => x.DepartmentName.ToLower() == model.DepartmentName.ToLower());
+            var isExist = DbContext.Departments.AsNoTracking().Any(x => x.IsDeleted == false && x.DepartmentName.ToLower() == model.DepartmentName.ToLower() && x.Id != model.Id);
             if (isExist) return BadRequest($"{model.DepartmentName} already exist. Please try with diffrent one");
 
             var department = DbContext.Departments.Add(model);
@@ -57,11 +57,11 @@ namespace CardSample.Server.Controllers
         }
 
 
-        public IHttpActionResult Put(string id, Department model)
+        public IHttpActionResult Put(Department model)
         {
             model.ModificationTime = DateTime.Now;
 
-            var isExist = DbContext.Departments.AsNoTracking().Any(x => x.DepartmentName.ToLower() == model.DepartmentName.ToLower());
+            var isExist = DbContext.Departments.AsNoTracking().Any(x => x.IsDeleted == false && x.DepartmentName.ToLower() == model.DepartmentName.ToLower() && x.Id != model.Id);
             if (isExist) return BadRequest($"{model.DepartmentName} already exist. Please try with diffrent one");
 
 

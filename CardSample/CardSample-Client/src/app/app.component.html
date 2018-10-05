@@ -27,7 +27,8 @@
         </div>
       </div>
       <div class="col-sm-3">
-        <button type="submit" class="btn btn-primary">ADD</button>
+        <button type="submit" class="btn btn-primary" *ngIf="!isUpdateMode">ADD</button>
+        <button type="submit" class="btn btn-info" *ngIf="isUpdateMode">UPDATE</button>
       </div>
     </form>
   </div>
@@ -47,10 +48,10 @@
     <tbody>
     <tr *ngFor="let department of departments">
       <td>
-        <button type="button" class="btn btn-info glyphicon glyphicon-edit" title="Edit"></button>
+        <button type="button" class="btn btn-info glyphicon glyphicon-edit" title="Edit" (click)="getDepartment(department.Id)"></button>
         &nbsp;
         &nbsp;
-        <button type="button" class="btn btn-danger glyphicon glyphicon-remove" title="Delete"></button>
+        <button type="button" class="btn btn-danger glyphicon glyphicon-remove" title="Delete" (click)="deleteDepartment(department.Id)"></button>
       </td>
       <td>{{department.DepartmentName}}</td>
       <td>{{department.Location}}</td>
@@ -67,3 +68,4 @@
   </table>
 </div>
 
+<notifier-container></notifier-container>
