@@ -5,16 +5,65 @@
   </h1>
   <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+
+<div class="row">
+  
+  <h3>Add Department</h3>
+  <div class="row">
+    <form #departmentForm="ngForm" (submit)="createDepartment(departmentForm.valid)">
+      <div class="col-sm-3">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="department name" [(ngModel)]="model.DepartmentName" name="DepartmentName" required/>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="location name" [(ngModel)]="model.Location" name="Location" required/>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="department head" [(ngModel)]="model.DepartmentHead" name="DepartmentHead" required/>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <button type="submit" class="btn btn-primary">ADD</button>
+      </div>
+    </form>
+  </div>
+
+  <br/>
+  <h3>Departments: </h3>
+  <table class="table">
+    <thead>
+    <tr>
+      <td>Action</td>
+      <td>Department</td>
+      <td>Location</td>
+      <td>Department Head</td>
+      <td>Employee Count</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let department of departments">
+      <td>
+        <button type="button" class="btn btn-info glyphicon glyphicon-edit" title="Edit"></button>
+        &nbsp;
+        &nbsp;
+        <button type="button" class="btn btn-danger glyphicon glyphicon-remove" title="Delete"></button>
+      </td>
+      <td>{{department.DepartmentName}}</td>
+      <td>{{department.Location}}</td>
+      <td>{{department.DepartmentHead}}</td>
+      <td>{{department.EmployeeCount}}</td>
+    </tr>
+    <!--<tr [hidden]="departments == null">
+      <td colspan="5" class="text-center">Loading</td>
+    </tr>-->
+    <tr [hidden]="departments != null && departments.length > 0">
+      <td colspan="5" class="text-center">No data found</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 

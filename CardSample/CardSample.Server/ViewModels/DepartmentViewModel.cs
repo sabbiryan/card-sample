@@ -15,6 +15,7 @@ namespace CardSample.Server.ViewModels
 
         public DepartmentViewModel(Department model)
         {
+            Id = model.Id;   
             DepartmentName = model.DepartmentName;
             Location = model.Location;
             DepartmentHead = model.DepartmentHead;
@@ -22,12 +23,14 @@ namespace CardSample.Server.ViewModels
             if (model.Employees != null && model.Employees.Count > 0)
             {
                 Employees = model.Employees.ToList().ConvertAll(x => new EmployeeViewModel(x));
+                EmployeeCount = model.Employees.Count;
             }
         }
 
         public string DepartmentName { get; set; }
         public string Location { get; set; }
         public string DepartmentHead { get; set; }
+        public int EmployeeCount { get; set; }
 
         public List<EmployeeViewModel> Employees { get; set; }
     }

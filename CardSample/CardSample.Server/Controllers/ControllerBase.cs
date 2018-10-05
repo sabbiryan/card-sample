@@ -11,15 +11,5 @@ namespace CardSample.Server.Controllers
         {
             DbContext = CardSampleDbContext.Create();
         }
-
-
-
-        public new void Dispose()
-        {
-
-            DbContext?.Dispose();
-            base.Dispose();
-        }
-
     }
 }

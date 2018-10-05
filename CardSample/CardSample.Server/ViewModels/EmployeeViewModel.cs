@@ -30,6 +30,6 @@ namespace CardSample.Server.ViewModels
         public decimal Salary { get; set; }
 
         public string DepartmentId { get; set; }
-        public virtual DepartmentViewModel Department { get; set; }
+        public DepartmentViewModel Department { get; set; }
     }
 }

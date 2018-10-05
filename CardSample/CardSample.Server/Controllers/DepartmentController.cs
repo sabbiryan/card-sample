@@ -24,7 +24,7 @@ namespace CardSample.Server.Controllers
 
         public IHttpActionResult Get()
         {
-            var departments = DbContext.Departments.Where(x => x.IsDeleted == false).ToList();
+            var departments = DbContext.Departments.Where(x => x.IsDeleted == false).Include(x => x.Employees).ToList();
             var viewModels = departments.ConvertAll(x => new DepartmentViewModel(x));
 
             return Ok(viewModels);
@@ -57,7 +57,7 @@ namespace CardSample.Server.Controllers
         }
 
 
-        public IHttpActionResult Put(Department model)
+        public IHttpActionResult Put(string id, Department model)
         {
             model.ModificationTime = DateTime.Now;
 
