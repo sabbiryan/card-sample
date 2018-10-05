@@ -23,6 +23,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "CardSample-Client", "CardSa
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "57748"
+		SlnRelativePath = "CardSample-Client\"
 	EndProjectSection
 EndProject
 Global
