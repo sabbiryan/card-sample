@@ -1,4 +1,20 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Card Sample</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li>
+        <a routerLink="" routerLinkActive="active">Department</a>
+      </li>
+      <li>
+        <a routerLink="/employee" routerLinkActive="active">Employees</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+
 <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
@@ -6,66 +22,9 @@
   <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
 
-<div class="row">
-  
-  <h3>Add Department</h3>
-  <div class="row">
-    <form #departmentForm="ngForm" (submit)="createDepartment(departmentForm.valid)">
-      <div class="col-sm-3">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="department name" [(ngModel)]="model.DepartmentName" name="DepartmentName" required/>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="location name" [(ngModel)]="model.Location" name="Location" required/>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="department head" [(ngModel)]="model.DepartmentHead" name="DepartmentHead" required/>
-        </div>
-      </div>
-      <div class="col-sm-3">
-        <button type="submit" class="btn btn-primary" *ngIf="!isUpdateMode">ADD</button>
-        <button type="submit" class="btn btn-info" *ngIf="isUpdateMode">UPDATE</button>
-      </div>
-    </form>
-  </div>
+<router-outlet #routerOutlet="outlet"></router-outlet>
 
-  <br/>
-  <h3>Departments: </h3>
-  <table class="table">
-    <thead>
-    <tr>
-      <td>Action</td>
-      <td>Department</td>
-      <td>Location</td>
-      <td>Department Head</td>
-      <td>Employee Count</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let department of departments">
-      <td>
-        <button type="button" class="btn btn-info glyphicon glyphicon-edit" title="Edit" (click)="getDepartment(department.Id)"></button>
-        &nbsp;
-        &nbsp;
-        <button type="button" class="btn btn-danger glyphicon glyphicon-remove" title="Delete" (click)="deleteDepartment(department.Id)"></button>
-      </td>
-      <td>{{department.DepartmentName}}</td>
-      <td>{{department.Location}}</td>
-      <td>{{department.DepartmentHead}}</td>
-      <td>{{department.EmployeeCount}}</td>
-    </tr>
-    <!--<tr [hidden]="departments == null">
-      <td colspan="5" class="text-center">Loading</td>
-    </tr>-->
-    <tr [hidden]="departments != null && departments.length > 0">
-      <td colspan="5" class="text-center">No data found</td>
-    </tr>
-    </tbody>
-  </table>
-</div>
 
 <notifier-container></notifier-container>
+
+

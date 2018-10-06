@@ -5,14 +5,19 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotifierModule } from 'angular-notifier';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { DepartmentComponent } from './department/department.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EmployeeComponent,
+    DepartmentComponent
   ],
   imports: [
-    BrowserModule, HttpModule, FormsModule, BrowserAnimationsModule, NotifierModule
+    BrowserModule, HttpModule, FormsModule, BrowserAnimationsModule, NotifierModule, AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

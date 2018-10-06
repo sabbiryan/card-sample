@@ -31,6 +31,7 @@ export class DepartmentService {
   }
 
   getAllDepartments(): Observable<any> {
+    console.log("DepartmentService.getAllDepartments invoked");
     return this.http.get(this.deparmtentApi)
       .pipe(map((response: Response) => response.json()));
     //.pipe(catchError(this.handleError('getAllDepartments', [])));
