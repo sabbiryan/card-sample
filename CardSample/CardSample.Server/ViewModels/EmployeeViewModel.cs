@@ -12,9 +12,10 @@ namespace CardSample.Server.ViewModels
 
         public EmployeeViewModel(Employee model)
         {
+            Id = model.Id;
             Name = model.Name;
             Gender = model.Gender;
-            GenderName = model.ToString();
+            GenderName = model.Gender.ToString();
             Salary = model.Salary;
             DepartmentId = model.DepartmentId;
 

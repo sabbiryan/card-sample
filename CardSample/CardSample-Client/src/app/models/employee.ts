@@ -2,7 +2,7 @@ import { Department } from "./department";
 
 export class Employee {
   Name: string;
-  Gender: number;
+  Gender: string;
   GenderName: string;
   Salary: number;
   DepartmentId: string;

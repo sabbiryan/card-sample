@@ -24,7 +24,7 @@ namespace CardSample.Server.Controllers
 
         public IHttpActionResult Get()
         {
-            var employees = DbContext.Employees.Where(x => x.IsDeleted == false).ToList();
+            var employees = DbContext.Employees.Where(x => x.IsDeleted == false).Include(x=> x.Department).ToList();
             var viewModels = employees.ConvertAll(x => new EmployeeViewModel(x));
 
             return Ok(viewModels);

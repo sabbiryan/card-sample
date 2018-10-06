@@ -22,7 +22,7 @@ namespace CardSample.Server.ViewModels
 
             if (model.Employees != null && model.Employees.Count > 0)
             {
-                Employees = model.Employees.ToList().ConvertAll(x => new EmployeeViewModel(x));
+                //Employees = model.Employees.ToList().ConvertAll(x => new EmployeeViewModel(x));
                 EmployeeCount = model.Employees.Count;
             }
         }
