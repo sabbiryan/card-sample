@@ -10,6 +10,7 @@
 <li>Bootstrap 3.x</li>
 <li>SQL Express 2017</li>
 <li>Angular Notifier</li>
+  <li>Client Server Disconnected Architecture</li>
 </ul>
 
 #### Models:
