@@ -23,6 +23,8 @@
       <div class="col-sm-3">
         <button type="submit" class="btn btn-primary" *ngIf="!isUpdateMode">ADD</button>
         <button type="submit" class="btn btn-info" *ngIf="isUpdateMode">UPDATE</button>
+        &nbsp;
+        <button type="button" class="btn btn-default" *ngIf="isUpdateMode" (click)="cancel()">CANCEL</button>
       </div>
     </form>
   </div>
@@ -50,7 +52,9 @@
         <td>{{department.DepartmentName}}</td>
         <td>{{department.Location}}</td>
         <td>{{department.DepartmentHead}}</td>
-        <td>{{department.EmployeeCount}}</td>
+        <td>
+          {{department.EmployeeCount}} (<a routerLink="/department/{{department.Id}}" routerLinkActive="active">view employees</a>)
+        </td>
       </tr>
       <!--<tr [hidden]="departments == null">
         <td colspan="5" class="text-center">Loading</td>

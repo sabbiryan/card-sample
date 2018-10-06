@@ -33,7 +33,7 @@ namespace CardSample.Server.Controllers
 
         public IHttpActionResult Get(string id)
         {
-            var department = DbContext.Departments.Find(id);
+            var department = DbContext.Departments.Include(x => x.Employees).FirstOrDefault(x => x.Id == id);
             var viewModel = new DepartmentViewModel(department);
 
 

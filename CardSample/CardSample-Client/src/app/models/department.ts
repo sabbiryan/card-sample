@@ -6,5 +6,5 @@ export class Department {
   Location: string;
   DepartmentHead: string;
   EmployeeCount: number;
-  Employee : Employee[];
+  Employees : Employee[];
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { NotifierService } from 'angular-notifier';
 
@@ -9,23 +9,31 @@ import { Department } from "../models/department";
 import { EmployeeService } from "../services/employee.service";
 import { Employee } from "../models/employee";
 
+
+
 @Component({
-  selector: 'app-employee',
-  templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.css'],
+  selector: 'app-department-employees',
+  templateUrl: './department-employees.component.html',
+  styleUrls: ['./department-employees.component.css'],
   providers: [DepartmentService, NotifierService, EmployeeService]
 })
-export class EmployeeComponent implements OnInit {
+export class DepartmentEmployeesComponent implements OnInit {
 
-  list: Employee[];
+
+  department: Department;
   model: Employee;
-  departments : Department[];
+  isCreateMode: boolean;
   isUpdateMode: boolean;
   genders: string[];
 
-  constructor(private employeeService: EmployeeService, private departmentService: DepartmentService, private notifierService: NotifierService) {
+  constructor(private employeeService: EmployeeService,
+    private departmentService: DepartmentService,
+    private notifierService: NotifierService,
+    private route: ActivatedRoute) {
 
-    this.model = new Employee();
+    this.department = new Department();
+    this.model = new Employee();    
+    this.isCreateMode = false;
     this.isUpdateMode = false;
 
     this.genders = [
@@ -36,55 +44,43 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllDepartments();
-    this.getAllEmployees();
+    this.getDepartment(this.route.snapshot.params["id"]);
+  }
 
-    
+  addEmployee() {
+    this.cancel();
+    this.model.DepartmentId = this.department.Id;
+    this.isCreateMode = true;
   }
 
 
+  getDepartment(id) {
 
-  getAllDepartments() {
-
-    this.departmentService.getAllDepartments()
-      .subscribe(
-        data => {
-
-          this.departments = data;
-          console.log(data);
-        },
-        error => console.log(error)
-      );
-  }
-
-
-
-  getAllEmployees() {
-
-    this.employeeService.getAllEmployees()
-      .subscribe(
-        data => {
-
-          this.list = data;
-          console.log(data);
-        },
-        error => console.log(error)
-      );
-  }
-
-
-  getEmployee(id) {
-    this.employeeService.getEmployee(id).subscribe(data => {
-      this.model = data;
-        this.model.Gender = this.model.GenderName;
-      this.notifierService.notify("info", "Data Loaded");
-      this.isUpdateMode = true;
-    },
+    this.departmentService.getDepartment(id).subscribe(data => {
+        console.log(data);
+        this.department = data;        
+        this.notifierService.notify("info", "Data Loaded");
+        this.isUpdateMode = false;
+        this.isCreateMode = false;
+      },
       error => {
         this.notifierService.notify("error", "Failed To Load Data!");
       });
   }
 
+
+  getEmployee(id) {
+    this.employeeService.getEmployee(id).subscribe(data => {
+        this.model = data;
+        this.model.Gender = this.model.GenderName;
+        this.notifierService.notify("info", "Data Loaded");
+        this.isUpdateMode = true;
+        this.isCreateMode = false;
+      },
+      error => {
+        this.notifierService.notify("error", "Failed To Load Data!");
+      });
+  }
 
 
   updateEmployee(isValid: boolean) {
@@ -100,7 +96,7 @@ export class EmployeeComponent implements OnInit {
           console.log(data);
           this.model = new Employee();
           this.notifierService.notify("success", "Update Success");
-          this.getAllEmployees();
+          this.getDepartment(this.route.snapshot.params["id"]);
           this.isUpdateMode = false;
         },
         error => {
@@ -128,7 +124,7 @@ export class EmployeeComponent implements OnInit {
           console.log(data);
           this.model = new Employee();
           this.notifierService.notify("success", "Create Success");
-          this.getAllEmployees();
+          this.getDepartment(this.route.snapshot.params["id"]);
           this.isUpdateMode = false;
         },
         error => {
@@ -142,7 +138,7 @@ export class EmployeeComponent implements OnInit {
 
   deleteEmployee(id) {
     this.employeeService.deleteEmployee(id).subscribe(data => {
-      this.getAllEmployees();
+      this.getDepartment(this.route.snapshot.params["id"]);
       this.notifierService.notify("info", "Delete Success");
     },
       error => {
@@ -153,6 +149,7 @@ export class EmployeeComponent implements OnInit {
   cancel() {
     this.model = new Employee();
     this.isUpdateMode = false;
+    this.isCreateMode = false;
     this.notifierService.notify("default", "Calceled");
   }
 }

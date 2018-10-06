@@ -22,7 +22,7 @@ namespace CardSample.Server.ViewModels
 
             if (model.Employees != null && model.Employees.Count > 0)
             {
-                //Employees = model.Employees.ToList().ConvertAll(x => new EmployeeViewModel(x));
+                Employees = model.Employees.ToList().ConvertAll(x => new DepartmentEmployeesViewModel(x));
                 EmployeeCount = model.Employees.Count;
             }
         }
@@ -32,6 +32,6 @@ namespace CardSample.Server.ViewModels
         public string DepartmentHead { get; set; }
         public int EmployeeCount { get; set; }
 
-        public List<EmployeeViewModel> Employees { get; set; }
+        public List<DepartmentEmployeesViewModel> Employees { get; set; }
     }
 }

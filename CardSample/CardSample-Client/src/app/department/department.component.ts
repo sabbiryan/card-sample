@@ -120,4 +120,9 @@ export class DepartmentComponent implements OnInit {
       });
   }
 
+  cancel() {
+    this.model = new Department();
+    this.isUpdateMode = false;
+    this.notifierService.notify("default", "Calceled");
+  }
 }
